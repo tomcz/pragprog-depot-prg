@@ -10,3 +10,5 @@ Departures from the book:
 3. The user, product and store controllers have been modified to use the POST-REDIRECT-GET web application
    design pattern (http://en.wikipedia.org/wiki/Post/Redirect/Get) as an exercise to see what it takes to make
    active-resource controllers (and other rails controllers) behave nicely with browsers' back & refresh buttons.
+
+4. Using RSpec (http://rspec.info/) for testing.
