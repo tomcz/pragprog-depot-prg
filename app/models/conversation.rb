@@ -1,14 +1,12 @@
 class Conversation < ActiveRecord::Base
 
-  NEW_ID = 'new'
-
   set_primary_key :uuid
   include UUIDHelper
 
   serialize :parameters
 
   def self.get_or_create(uuid)
-    if uuid == NEW_ID
+    if uuid.to_sym == :new
       self.new
     else
       conversation = self.find_by_uuid(uuid)

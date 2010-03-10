@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   # GET /users/new.xml
   def new
     respond_to do |format|
-      format.html { redirect_to :action => 'form', :id => Conversation::NEW_ID }
+      format.html { redirect_to :action => 'form', :id => :new }
       format.xml  { render :xml => User.new }
     end
   end

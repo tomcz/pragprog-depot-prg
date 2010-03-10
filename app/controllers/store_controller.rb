@@ -26,14 +26,14 @@ class StoreController < ApplicationController
   end
 
   def new_order
-    redirect_to :action => 'checkout', :id => Conversation::NEW_ID
+    redirect_to :action => 'checkout', :id => :new
   end
 
   def checkout
     @cart = find_cart
     conversation = Conversation.get_or_create(params[:id])
     if conversation.new_record?
-      @conversation_id = Conversation::NEW_ID
+      @conversation_id = :new
       @order = Order.new
     else
       @conversation_id = conversation.id
