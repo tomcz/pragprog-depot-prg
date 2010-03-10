@@ -2,16 +2,18 @@ require 'spec_helper'
 
 describe Product do
 
+  fixtures :products
+
   it 'is invalid with empty attributes' do
     product = Product.new
     product.should_not be_valid
-    product.errors.should be_invalid(:title)
-    product.errors.should be_invalid(:description)
-    product.errors.should be_invalid(:price)
-    product.errors.should be_invalid(:image_url)
+    product.should have(1).error_on(:title)
+    product.should have(1).error_on(:description)
+    product.should have(1).error_on(:price)
+    product.should have(2).errors_on(:image_url)
   end
 
-  describe 'price validation' do
+  context 'price validation' do
     before(:each) do
       @product = Product.new(:title => "My Book Title", :description => "yyy", :image_url => "zzz.jpg")
     end
@@ -31,7 +33,7 @@ describe Product do
     end
   end
 
-  describe 'image url validation' do
+  context 'image url validation' do
     before(:each) do
       @product = Product.new(:title => "My Book Title", :description => "yyy", :price => 1)
     end
@@ -40,6 +42,7 @@ describe Product do
       ok.each do |url|
         @product.image_url = url
         @product.should be_valid
+        @product.should have(:no).errors_on(:image_url)
       end
     end
     it 'is invalid with unknown image extension' do
@@ -47,7 +50,18 @@ describe Product do
       bad.each do |url|
         @product.image_url = url
         @product.should_not be_valid
+        @product.should have(1).error_on(:image_url)
       end
+    end
+  end
+
+  context 'title validation' do
+    it 'validates that the title is unique' do
+      title = products(:ruby_book).title
+      product = Product.new(:title => title, :description => "yyy", :price => 1, :image_url => "fred.gif")
+      product.should_not be_valid
+      product.should have(1).error_on(:title)
+      product.errors_on(:title).should == ['has already been taken']
     end
   end
 
