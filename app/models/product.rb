@@ -3,6 +3,9 @@ class Product < ActiveRecord::Base
   set_primary_key :uuid
   include UUIDHelper
 
+  has_many :line_items
+  has_many :orders, :through => :line_items
+
   validates_presence_of :title, :description, :image_url
   validates_uniqueness_of :title
 
