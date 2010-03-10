@@ -61,7 +61,7 @@ describe Product do
       product = Product.new(:title => title, :description => "yyy", :price => 1, :image_url => "fred.gif")
       product.should_not be_valid
       product.should have(1).error_on(:title)
-      product.errors_on(:title).should == ['has already been taken']
+      product.errors.on(:title).should == 'has already been taken'
     end
   end
 
