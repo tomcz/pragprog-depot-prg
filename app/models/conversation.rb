@@ -6,7 +6,7 @@ class Conversation < ActiveRecord::Base
   serialize :parameters
 
   def self.get_or_create(uuid)
-    if uuid.to_sym == :new
+    if uuid.to_s == 'new'
       self.new
     else
       conversation = self.find_by_uuid(uuid)
@@ -18,7 +18,7 @@ class Conversation < ActiveRecord::Base
   end
 
   def self.destroy_if_exists(uuid)
-    if uuid != NEW_ID and self.exists? uuid
+    if uuid.to_s != 'new' and self.exists? uuid
       self.destroy uuid
     end
   end
