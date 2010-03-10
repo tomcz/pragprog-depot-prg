@@ -1,0 +1,11 @@
+%h1 Your Pragmatic Catalog
+
+- @products.each do |product|
+  .entry
+    = image_tag(product.image_url)
+    %h3&= product.title
+    = product.description
+    .price-line
+      %span.price= number_to_currency(product.price)
+      - form_remote_tag :url => { :action => 'add_to_cart', :id => product } do
+        = submit_tag "Add to Cart"

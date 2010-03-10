@@ -1,0 +1,36 @@
+#order
+
+  %p
+    %b Date:
+    = order_date_format(@order)
+
+  %p
+    %b Name:
+    &= @order.name
+
+  %p
+    %b Email:
+    &= @order.email
+
+  %p
+    %b Address:
+    &= @order.address
+
+  %p
+    %b Payment Type:
+    = @order.payment_type
+
+  %p
+    %b Order Total:
+    = number_to_currency(@order.total_price)
+
+  %table
+    %tr
+      %th Product
+      %th Quantity
+      %th Item Total
+    - for line_item in @order.line_items
+      %tr
+        %td&= line_item.product.title
+        %td.quantity= line_item.quantity
+        %td.price= number_to_currency(line_item.total_price)

@@ -1,0 +1,10 @@
+.cart-title Your Cart
+
+%table
+  = render(:partial => "cart_item", :collection => cart.items)
+  %tr.total-line
+    %td{:colspan => 2} Total
+    %td.total-cell= number_to_currency(cart.total_price)
+
+= button_to "Checkout", :action => 'new_order'
+= button_to 'Empty cart', :action => 'empty_cart'

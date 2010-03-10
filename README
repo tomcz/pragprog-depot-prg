@@ -1,0 +1,9 @@
+This project contains the depot application as described in the Agile Development with Rails book from the
+Pragmatic Programmers (http://pragprog.com/titles/rails3/agile-web-development-with-rails-third-edition).
+
+It has been modified to use HAML (http://haml-lang.com/) & SASS (http://sass-lang.com/) for HTML & CSS generation.
+
+In addition the user, product and store controllers have been modified to use the POST-REDIRECT-GET web application
+design pattern (http://en.wikipedia.org/wiki/Post/Redirect/Get) as an exercise to see what it takes to make
+active-resource controllers behave nicely with browsers.
+

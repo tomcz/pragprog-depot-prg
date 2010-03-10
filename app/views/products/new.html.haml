@@ -1,0 +1,26 @@
+%h1 New product
+
+- form_for(@product) do |f|
+  = f.error_messages
+  %input{:type => 'hidden', :name => 'conversation_id', :value => @conversation_id}
+  %p
+    = f.label :title
+    %br
+    = f.text_field :title
+  %p
+    = f.label :description
+    %br
+    = f.text_area :description
+  %p
+    = f.label :image_url
+    %br
+    = f.text_field :image_url
+  %p
+    = f.label :price
+    %br
+    = f.text_field :price
+  %p
+    = f.submit 'Create'
+
+%p
+  = link_to 'Back', products_path

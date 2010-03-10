@@ -1,0 +1,20 @@
+.depot-form
+  - form_for(@user) do |f|
+    = f.error_messages
+    %input{:type => 'hidden', :name => 'conversation_id', :value => @conversation_id}
+    %fieldset
+      %legend Enter User Details
+      %div
+        = f.label :name
+        = f.text_field :name, :size => 40
+      %div
+        = f.label :password, 'Password'
+        = f.password_field :password, :size => 40
+      %div
+        = f.label :password_confirmation, 'Confirm'
+        = f.password_field :password_confirmation, :size => 40
+      %div
+        = f.submit "Add User", :class => "submit"
+
+%p
+  = link_to 'Back', users_path

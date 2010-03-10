@@ -1,0 +1,21 @@
+#order-list
+
+  %h1 Listing orders
+
+  %table
+    %tr
+      %th Date
+      %th Name
+      %th Email
+      %th Pay Type
+      %th Item Count
+      %th Total Price
+    - for order in @orders
+      %tr
+        %td= order_date_format(order)
+        %td&= order.name
+        %td&= order.email
+        %td= order.payment_type
+        %td.quantity= order.total_items
+        %td.price= number_to_currency(order.total_price)
+        %td= link_to 'Show', order

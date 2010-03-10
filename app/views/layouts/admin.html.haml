@@ -1,0 +1,27 @@
+!!!
+%html(xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en")
+  %head
+    %meta(http-equiv="content-type" content="text/html;charset=UTF-8")
+    %title Pragprog Books Online Store
+    = stylesheet_link_tag 'scaffold', 'depot'
+  %body#store
+    #banner
+      = image_tag("logo.png")
+      = @page_title || "Pragmatic Bookshelf"
+    #columns
+      #side
+        %a(href="/store/index") Home
+        %br
+        - if session[:user_id]
+          = link_to 'Orders', :controller => 'orders'
+          %br
+          = link_to 'Products', :controller => 'products'
+          %br
+          = link_to 'Users', :controller => 'users'
+          %br
+          = link_to 'Logout', :controller => 'admin', :action => 'logout'
+          %br
+      #main
+        - if flash[:notice]
+          #notice= flash[:notice]
+        = yield
