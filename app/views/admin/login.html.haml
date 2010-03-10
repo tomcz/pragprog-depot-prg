@@ -4,9 +4,9 @@
       %legend Please Log In
       %div
         %label{:for => 'name'} Name
-        = text_field_tag :name, params[:name]
+        = text_field_tag :name
       %div
         %label{:for => 'password'} Password
-        = password_field_tag :password, params[:password]
+        = password_field_tag :password
       %div
         = submit_tag "Login"
