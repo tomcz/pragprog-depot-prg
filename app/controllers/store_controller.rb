@@ -52,9 +52,7 @@ class StoreController < ApplicationController
       redirect_to_index("Thank you for your order")
     else
       conversation = Conversation.get_or_create(params[:id])
-      conversation.parameters = params[:order]
-      conversation.context = 'order'
-      conversation.save!
+      conversation.update_attributes! :parameters => params[:order], :context => 'order'
       redirect_to :action => 'checkout', :id => conversation
     end
   end

@@ -36,12 +36,7 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     product = Product.find(params[:id])
-
-    conversation = Conversation.new
-    conversation.ref_id = product.id
-    conversation.context = 'product'
-    conversation.save!
-
+    conversation = Conversation.create! :ref_id => product.id, :context => 'product'
     redirect_to :action => 'form', :id => conversation
   end
 
@@ -80,9 +75,7 @@ class ProductsController < ApplicationController
       else
         format.html {
           conversation = Conversation.get_or_create(params[:conversation_id])
-          conversation.parameters = params[:product]
-          conversation.context = 'product'
-          conversation.save!
+          conversation.update_attributes! :parameters => params[:product], :context => 'product'
           redirect_to :action => 'form', :id => conversation
         }
         format.xml { render :xml => product.errors, :status => :unprocessable_entity }
@@ -106,10 +99,7 @@ class ProductsController < ApplicationController
       else
         format.html {
           conversation = Conversation.get_or_create(params[:conversation_id])
-          conversation.parameters = params[:product]
-          conversation.ref_id = product.id
-          conversation.context = 'product'
-          conversation.save!
+          conversation.update_attributes! :ref_id => product.id, :parameters => params[:product], :context => 'product'
           redirect_to :action => 'form', :id => conversation
         }
         format.xml { render :xml => product.errors, :status => :unprocessable_entity }

@@ -36,12 +36,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     user = User.find(params[:id])
-
-    conversation = Conversation.new
-    conversation.ref_id = user.id
-    conversation.context = 'user'
-    conversation.save!
-
+    conversation = Conversation.create! :ref_id => user.id, :context => 'user'
     redirect_to :action => 'form', :id => conversation
   end
 
@@ -80,9 +75,7 @@ class UsersController < ApplicationController
       else
         format.html {
           conversation = Conversation.get_or_create(params[:conversation_id])
-          conversation.parameters = params[:user]
-          conversation.context = 'user'
-          conversation.save!
+          conversation.update_attributes! :parameters => params[:user], :context => 'user'
           redirect_to :action => 'form', :id => conversation
         }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
@@ -106,10 +99,7 @@ class UsersController < ApplicationController
       else
         format.html {
           conversation = Conversation.get_or_create(params[:conversation_id])
-          conversation.parameters = params[:user]
-          conversation.ref_id = @user.id
-          conversation.context = 'user'
-          conversation.save!
+          conversation.update_attributes! :ref_id => @user.id, :parameters => params[:user], :context => 'user'
           redirect_to :action => 'form', :id => conversation
         }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
