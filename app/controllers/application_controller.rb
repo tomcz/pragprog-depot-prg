@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def authorize
-    unless User.find_by_uuid(session[:user_id])
+    user_id = session[:user_id]
+    unless user_id and User.find_by_uuid(user_id)
       session[:original_uri] = request.request_uri
       redirect_to :controller => 'admin', :action => 'login'
     end
