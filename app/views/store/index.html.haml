@@ -1,7 +1,7 @@
 %h1 Your Pragmatic Catalog
 
 - @products.each do |product|
-  .entry
+  %div{:id => "product_#{product.id}", :class => 'entry'}
     = image_tag(product.image_url)
     %h3&= product.title
     = product.description
