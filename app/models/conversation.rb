@@ -18,8 +18,9 @@ class Conversation < ActiveRecord::Base
   end
 
   def self.destroy_if_exists(uuid)
-    if uuid.to_s != 'new' and self.exists? uuid
-      self.destroy uuid
+    unless uuid.to_s == 'new'
+      conversation = self.find_by_uuid(uuid)
+      conversation.destroy if conversation
     end
   end
 
