@@ -43,15 +43,7 @@ class UsersController < ApplicationController
   def form
     @conversation_id = params[:id]
     conversation = Conversation.get_or_create(@conversation_id)
-    if conversation.ref_id
-      @user = User.find(conversation.ref_id)
-    else
-      @user = User.new
-    end
-    if conversation.parameters
-      @user.attributes = conversation.parameters
-      @user.valid?
-    end
+    @user = conversation.setup_instance(User)
     if conversation.ref_id
       render :action => "edit"
     else

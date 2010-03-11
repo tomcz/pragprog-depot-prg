@@ -43,15 +43,7 @@ class ProductsController < ApplicationController
   def form
     @conversation_id = params[:id]
     conversation = Conversation.get_or_create(@conversation_id)
-    if conversation.ref_id
-      @product = Product.find(conversation.ref_id)
-    else
-      @product = Product.new
-    end
-    if conversation.parameters
-      @product.attributes = conversation.parameters
-      @product.valid?
-    end
+    @product = conversation.setup_instance(Product)
     if conversation.ref_id
       render :action => "edit"
     else

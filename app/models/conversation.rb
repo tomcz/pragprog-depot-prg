@@ -23,4 +23,17 @@ class Conversation < ActiveRecord::Base
     end
   end
 
+  def setup_instance(model_class)
+    if self.ref_id
+      item = model_class.find(self.ref_id)
+    else
+      item = model_class.new
+    end
+    if self.parameters
+      item.attributes = self.parameters
+      item.valid?
+    end
+    item
+  end
+
 end

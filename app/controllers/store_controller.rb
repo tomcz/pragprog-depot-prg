@@ -31,15 +31,9 @@ class StoreController < ApplicationController
 
   def checkout
     @cart = find_cart
-    conversation = Conversation.get_or_create(params[:id])
-    if conversation.new_record?
-      @conversation_id = :new
-      @order = Order.new
-    else
-      @conversation_id = conversation.id
-      @order = Order.new(conversation.parameters)
-      @order.valid?
-    end
+    @conversation_id = params[:id]
+    conversation = Conversation.get_or_create(@conversation_id)
+    @order = conversation.setup_instance(Order)
   end
 
   def save_order
