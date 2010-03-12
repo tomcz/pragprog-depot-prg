@@ -24,8 +24,13 @@ Then /^an order is created for the user with a line item corresponding to their 
 
   order = Order.find(:all, :order => 'created_at DESC').first
   order.line_items.size.should == 1
+  order.created_at.should be_recent
 
   line_item = order.line_items.first
   line_item.product.id.should == @product_id
   line_item.quantity.should == 1
+end
+
+def be_recent
+  simple_matcher("less than five seconds old") { |given| given > Time.now - 5 }
 end
