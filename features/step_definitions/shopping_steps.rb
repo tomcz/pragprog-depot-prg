@@ -11,8 +11,9 @@ When /^user adds a product to their shopping cart$/ do
 end
 
 And /^fills in their details on the checkout form$/ do
+  @customer_name = UUIDTools::UUID.random_create.to_s
   click_button 'Checkout'
-  fill_in 'order_name', :with => 'Homer Simpson'
+  fill_in 'order_name', :with => @customer_name
   fill_in 'order_address', :with => '9 Evergreen Terrace, Springfield'
   fill_in 'order_email', :with => 'homer@simpson.name'
   select 'Credit Card'
@@ -22,7 +23,8 @@ end
 Then /^an order is created for the user with a line item corresponding to their selected product$/ do
   response.should have_selector('div#notice', :content => 'Thank you for your order')
 
-  order = Order.find(:all, :order => 'created_at DESC').first
+  order = Order.find_by_name(@customer_name)
+  order.should_not be_nil
   order.line_items.size.should == 1
 
   line_item = order.line_items.first
