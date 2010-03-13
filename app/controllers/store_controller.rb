@@ -1,15 +1,14 @@
 class StoreController < ApplicationController
 
+  before_filter :load_cart, :except => [:empty_cart]
   before_filter :cart_is_not_empty, :only => [:new_order, :checkout, :save_order]
 
   def index
     @products = Product.find_products_for_sale
-    @cart = find_cart
   end
 
   def add_to_cart
     product = Product.find(params[:id])
-    @cart = find_cart
     @current_item = @cart.add_product(product)
     respond_to do |format|
       format.js if request.xhr?
@@ -30,14 +29,12 @@ class StoreController < ApplicationController
   end
 
   def checkout
-    @cart = find_cart
     @conversation_id = params[:id]
     conversation = Conversation.get_or_create(@conversation_id)
     @order = conversation.setup_instance(Order)
   end
 
   def save_order
-    @cart = find_cart
     @order = Order.new(params[:order])
     @order.add_line_items_from_cart(@cart)
     if @order.save
@@ -53,8 +50,12 @@ class StoreController < ApplicationController
 
   protected
 
+  def load_cart
+    @cart = session[:cart] ||= Cart.new
+  end
+
   def cart_is_not_empty
-    if find_cart.items.empty?
+    if @cart.items.empty?
       redirect_to_index("Your cart is empty")
     end
   end
@@ -64,10 +65,6 @@ class StoreController < ApplicationController
   end
 
   private
-
-  def find_cart
-    session[:cart] ||= Cart.new
-  end
 
   def redirect_to_index(msg = nil)
     flash[:notice] = msg if msg
