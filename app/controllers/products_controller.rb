@@ -60,7 +60,7 @@ class ProductsController < ApplicationController
       if product.save
         flash[:notice] = 'Product was successfully created.'
         format.html {
-          Conversation.destroy_if_exists(params[:conversation_id])
+          Conversation.delete_if_exists(params[:conversation_id])
           redirect_to(product)
         }
         format.xml { render :xml => product, :status => :created, :location => product }
@@ -84,7 +84,7 @@ class ProductsController < ApplicationController
       if product.update_attributes(params[:product])
         flash[:notice] = 'Product was successfully updated.'
         format.html {
-          Conversation.destroy_if_exists(params[:conversation_id])
+          Conversation.delete_if_exists(params[:conversation_id])
           redirect_to(product)
         }
         format.xml { head :ok }

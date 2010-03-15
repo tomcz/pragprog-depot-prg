@@ -39,7 +39,7 @@ class StoreController < ApplicationController
     @order.add_line_items_from_cart(@cart)
     if @order.save
       session[:cart] = nil
-      Conversation.destroy_if_exists(params[:id])
+      Conversation.delete_if_exists(params[:id])
       redirect_to_index("Thank you for your order")
     else
       conversation = Conversation.get_or_create(params[:id])

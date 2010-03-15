@@ -60,7 +60,7 @@ class UsersController < ApplicationController
       if @user.save
         flash[:notice] = "User #{@user.name} was successfully created."
         format.html {
-          Conversation.destroy_if_exists(params[:conversation_id])
+          Conversation.delete_if_exists(params[:conversation_id])
           redirect_to :action=>'index'
         }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
       if @user.update_attributes(params[:user])
         flash[:notice] = "User #{@user.name} was successfully updated."
         format.html {
-          Conversation.destroy_if_exists(params[:conversation_id])
+          Conversation.delete_if_exists(params[:conversation_id])
           redirect_to :action=>'index'
         }
         format.xml  { head :ok }
