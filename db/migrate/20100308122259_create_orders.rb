@@ -2,7 +2,7 @@ class CreateOrders < ActiveRecord::Migration
 
   def self.up
     create_table :orders, :id => false do |t|
-      t.string :uuid, :primary => true, :limit => 36
+      t.string :uuid, :primary => true, :limit => 36, :null => false
       t.string :name
       t.text :address
       t.string :email

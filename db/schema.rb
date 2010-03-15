@@ -12,7 +12,7 @@
 ActiveRecord::Schema.define(:version => 20100309042714) do
 
   create_table "conversations", :id => false, :force => true do |t|
-    t.string   "uuid",       :limit => 36
+    t.string   "uuid",       :limit => 36, :null => false
     t.string   "context"
     t.string   "ref_id"
     t.text     "parameters"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20100309042714) do
   add_index "conversations", ["ref_id"], :name => "index_conversations_on_ref_id"
 
   create_table "line_items", :id => false, :force => true do |t|
-    t.string   "uuid",        :limit => 36
+    t.string   "uuid",        :limit => 36,                               :null => false
     t.string   "product_id",                                              :null => false
     t.string   "order_id",                                                :null => false
     t.integer  "quantity",                                                :null => false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20100309042714) do
   end
 
   create_table "orders", :id => false, :force => true do |t|
-    t.string   "uuid",       :limit => 36
+    t.string   "uuid",       :limit => 36, :null => false
     t.string   "name"
     t.text     "address"
     t.string   "email"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20100309042714) do
   end
 
   create_table "products", :id => false, :force => true do |t|
-    t.string   "uuid",        :limit => 36
+    t.string   "uuid",        :limit => 36,                                                :null => false
     t.string   "title"
     t.text     "description"
     t.string   "image_url"
