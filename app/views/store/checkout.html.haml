@@ -1,6 +1,6 @@
 .depot-form
   = error_messages_for 'order'
-  - form_for :order, :url => { :action => :save_order, :id => @conversation_id } do |form|
+  - form_for :order, :url => { :action => :save_order, :id => @conversation_id }, :html => {:class => 'checkout'} do |form|
     %fieldset
       %legend Please Enter Your Details
       %div
