@@ -11,8 +11,7 @@
 
 ActiveRecord::Schema.define(:version => 20100309042714) do
 
-  create_table "conversations", :id => false, :force => true do |t|
-    t.string   "uuid",       :limit => 36, :null => false
+  create_table "conversations", :primary_key => "uuid", :force => true do |t|
     t.string   "context"
     t.string   "ref_id"
     t.text     "parameters"
@@ -22,18 +21,16 @@ ActiveRecord::Schema.define(:version => 20100309042714) do
 
   add_index "conversations", ["ref_id"], :name => "index_conversations_on_ref_id"
 
-  create_table "line_items", :id => false, :force => true do |t|
-    t.string   "uuid",        :limit => 36,                               :null => false
-    t.string   "product_id",                                              :null => false
-    t.string   "order_id",                                                :null => false
-    t.integer  "quantity",                                                :null => false
-    t.decimal  "total_price",               :precision => 8, :scale => 2, :null => false
+  create_table "line_items", :primary_key => "uuid", :force => true do |t|
+    t.string   "product_id",                                :null => false
+    t.string   "order_id",                                  :null => false
+    t.integer  "quantity",                                  :null => false
+    t.decimal  "total_price", :precision => 8, :scale => 2, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "orders", :id => false, :force => true do |t|
-    t.string   "uuid",       :limit => 36, :null => false
+  create_table "orders", :primary_key => "uuid", :force => true do |t|
     t.string   "name"
     t.text     "address"
     t.string   "email"
@@ -42,14 +39,13 @@ ActiveRecord::Schema.define(:version => 20100309042714) do
     t.datetime "updated_at"
   end
 
-  create_table "products", :id => false, :force => true do |t|
-    t.string   "uuid",        :limit => 36,                                                :null => false
+  create_table "products", :primary_key => "uuid", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.string   "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "price",                     :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "price",       :precision => 8, :scale => 2, :default => 0.0
   end
 
   create_table "sessions", :force => true do |t|
@@ -62,8 +58,7 @@ ActiveRecord::Schema.define(:version => 20100309042714) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "users", :id => false, :force => true do |t|
-    t.string   "uuid",            :limit => 36
+  create_table "users", :primary_key => "uuid", :force => true do |t|
     t.string   "name"
     t.string   "hashed_password"
     t.string   "salt"

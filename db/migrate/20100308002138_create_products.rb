@@ -7,6 +7,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :image_url
       t.timestamps
     end
+    execute("ALTER TABLE products ADD PRIMARY KEY (uuid)")
   end
 
   def self.down

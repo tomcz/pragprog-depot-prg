@@ -9,6 +9,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :pay_type, :limit => 10
       t.timestamps
     end
+    execute("ALTER TABLE orders ADD PRIMARY KEY (uuid)")
   end
 
   def self.down

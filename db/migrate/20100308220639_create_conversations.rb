@@ -8,6 +8,7 @@ class CreateConversations < ActiveRecord::Migration
       t.text :parameters
       t.timestamps
     end
+    execute("ALTER TABLE conversations ADD PRIMARY KEY (uuid)")
     add_index :conversations, :ref_id
   end
 

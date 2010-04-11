@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :salt
       t.timestamps
     end
+    execute("ALTER TABLE users ADD PRIMARY KEY (uuid)")
     User.create! :name => 'admin', :password => 'password', :password_confirmation => 'password'
   end
 

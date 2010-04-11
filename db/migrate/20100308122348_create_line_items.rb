@@ -9,6 +9,7 @@ class CreateLineItems < ActiveRecord::Migration
       t.decimal :total_price, :null => false, :precision => 8, :scale => 2
       t.timestamps
     end
+    execute("ALTER TABLE line_items ADD PRIMARY KEY (uuid)")
   end
 
   def self.down
