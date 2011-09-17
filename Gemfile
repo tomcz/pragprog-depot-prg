@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '2.3.8'
 gem 'ruby-mysql', '2.9.3'
 gem 'uuidtools', '2.1.1'
-gem 'haml'
+gem 'haml', '3.1.3'
 
 group :development, :test do
   gem 'cucumber-rails', '0.3.0'
