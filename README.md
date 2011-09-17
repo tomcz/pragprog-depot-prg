@@ -11,6 +11,6 @@ Departures from the book:
    web application design pattern as an exercise to see what it takes to make active-resource controllers
    (and other rails controllers) behave nicely with browsers' back & refresh buttons.
 
-4. Using [RSpec](http://rspec.info/) and [Cucumber](http://cukes.info/) for testing.
+4. Uses [RSpec](http://rspec.info/) and [Cucumber](http://cukes.info/) for testing.
 
 [PRG]: http://en.wikipedia.org/wiki/Post/Redirect/Get
