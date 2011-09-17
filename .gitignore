@@ -5,3 +5,4 @@ doc/app
 .idea
 .DS_Store
 rerun.txt
+*.swp
