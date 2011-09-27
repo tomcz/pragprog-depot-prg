@@ -4,7 +4,6 @@ gem 'rails', '2.3.8'
 gem 'uuidtools', '2.1.1'
 gem 'haml', '3.1.3'
 gem 'sass', '3.1.7'
-gem 'rdoc', '3.9.4'
 
 # env ARCHFLAGS="-arch x86_64" gem install mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
 # export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
@@ -17,4 +16,5 @@ group :development, :test do
   gem 'test-unit', '1.2.3'
   gem 'rspec-rails', '1.3.2'
   gem 'webrat', '0.7.0'
+  gem 'rdoc', '3.9.4'
 end
