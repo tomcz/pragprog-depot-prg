@@ -5,7 +5,7 @@ gem 'uuidtools', '2.1.1'
 gem 'haml', '3.1.3'
 gem 'sass', '3.1.7'
 
-# env ARCHFLAGS="-arch x86_64" gem install mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
+# env ARCHFLAGS="-arch x86_64" gem install mysql -v 2.8.1 -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
 # export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 gem 'mysql', '2.8.1'
 
